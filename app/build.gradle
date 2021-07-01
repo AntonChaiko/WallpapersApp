@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -30,16 +31,57 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    buildFeatures{
+        dataBinding = true
+    }
 }
 
 dependencies {
+    implementation Dependencies.kotlinStdlib
 
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation 'androidx.core:core-ktx:1.5.0'
+    implementation Dependencies.coreKtx
+    implementation Dependencies.appCompat
+    implementation Dependencies.material
+    implementation Dependencies.constraintLayout
     implementation 'androidx.appcompat:appcompat:1.3.0'
     implementation 'com.google.android.material:material:1.3.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
-    testImplementation 'junit:junit:4.+'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+
+    //Tests
+    testImplementation Dependencies.junit
+    androidTestImplementation Dependencies.junitExt
+    androidTestImplementation Dependencies.espresso
+
+    //Dagger
+    implementation Dependencies.dagger
+    kapt Kapts.daggerCompiler
+
+    //Room
+    implementation Dependencies.roomRuntime
+    kapt Kapts.roomCompiler
+
+    //Retrofit
+    implementation Dependencies.retrofitGson
+    implementation Dependencies.retrofit
+
+    //Navigation
+    implementation Dependencies.navFragment
+    implementation Dependencies.navUi
+    implementation Dependencies.navDynamic
+    implementation Dependencies.navRuntime
+
+    //Coroutines
+    implementation Dependencies.ktCoRoutines
+    implementation Dependencies.ktCoRoutinesAndroid
+
+    //LiveData
+    implementation Dependencies.liveDataExt
+    implementation Dependencies.liveDataViewModel
+
+    //Logging
+    implementation Dependencies.timber
+
+    implementation project(path: ':domain')
+    implementation project(path: ':data')
+
 }
