@@ -4,13 +4,18 @@ import android.util.Log
 import androidx.lifecycle.*
 import com.example.data.model.BaseEntity
 import com.example.data.model.ImageEntity
-import com.example.data.model.Results
-import com.example.data.remote.api.ImageApi
+import com.example.data.repository.ImageApiRepositoryImpl
+import com.example.domain.repository.ImageApiRepository
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
 import kotlinx.coroutines.launch
-import timber.log.Timber
-import java.lang.Exception
+import javax.inject.Inject
 
-class TestFragmentViewModel : ViewModel() {
+class TestFragmentViewModel(
+    private val newsId: String,
+    private val repository: ImageApiRepositoryImpl
+    ) : ViewModel() {
 
     private val _photos = MutableLiveData<List<ImageEntity>>()
     val photos: LiveData<List<ImageEntity>> = _photos
@@ -19,26 +24,33 @@ class TestFragmentViewModel : ViewModel() {
     val collection: LiveData<BaseEntity> = _collection
 
     init {
-        Log.d("asd","view model init")
         getPhotos()
-        Log.d("asd","${photos.value?.get(0)?.id}")
     }
 
     private fun getPhotos() {
         viewModelScope.launch {
             try {
-                _photos.value = ImageApi.retrofitService.getImages()
-                _collection.value = ImageApi.retrofitService.getCollection("dog")
-                Log.d("asd","success")
-                Log.d("asd","${photos.value?.get(0)?.links?.full}")
-                Log.d("asd","dogs ${collection.value?.results?.get(0)?.cover_photo}")
+                _photos.value = repository.getListOfImages()
 
             } catch (e: Exception) {
-                Log.d("asd",e.message.toString())
+                Log.d("asd", e.message.toString())
             }
         }
     }
-    fun refreshPhotos() : LiveData<List<ImageEntity>>{
-        return photos
+
+}
+class NewsDetailsViewModelFactory @AssistedInject constructor(
+    @Assisted("newsId") private val newsId: String,
+    private val repository: ImageApiRepositoryImpl,
+) : ViewModelProvider.Factory {
+
+    @Suppress("UNCHECKED_CAST")
+    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+        return TestFragmentViewModel(newsId,repository) as T
+    }
+
+    @AssistedFactory
+    interface Factory {
+        fun create(@Assisted("newsId") newsId: String): NewsDetailsViewModelFactory
     }
 }

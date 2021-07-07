@@ -31,7 +31,7 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-    buildFeatures{
+    buildFeatures {
         dataBinding = true
     }
 }
@@ -46,6 +46,12 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
+    // implementation Dependencies.retrofitGson
+    implementation 'com.squareup.retrofit2:converter-moshi:2.9.0'
+
+
+    // Moshi
+    implementation 'com.squareup.moshi:moshi-kotlin:1.9.3'
     //Coil
     implementation("io.coil-kt:coil:1.2.2")
 
@@ -55,8 +61,8 @@ dependencies {
     androidTestImplementation Dependencies.espresso
 
     //Dagger
-    implementation Dependencies.dagger
-    kapt Kapts.daggerCompiler
+    implementation("com.google.dagger:dagger:2.36")
+    kapt("com.google.dagger:dagger-compiler:2.36")
 
     //Room
     implementation Dependencies.roomRuntime
@@ -77,11 +83,13 @@ dependencies {
     implementation Dependencies.ktCoRoutinesAndroid
 
     //LiveData
-    implementation Dependencies.liveDataExt
-    implementation Dependencies.liveDataViewModel
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0-alpha02")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.4.0-alpha02")
+    implementation("androidx.lifecycle:lifecycle-common-java8:2.4.0-alpha02")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.4.0-alpha02")
 
     //Logging
-    implementation Dependencies.timber
+//    implementation Dependencies.timber
 
     implementation project(path: ':domain')
     implementation project(path: ':data')
