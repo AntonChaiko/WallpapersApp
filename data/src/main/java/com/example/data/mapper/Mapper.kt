@@ -1,8 +1,5 @@
 package com.example.data.mapper
 
-import com.example.data.model.ImageEntity
-import com.example.domain.model.dto.ImageEntityDto
-
 //class Mapper {
 //}
 //fun List<EmployeeModel>.asDomainModel(): List<EmployeeDb> {

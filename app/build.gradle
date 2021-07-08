@@ -33,6 +33,7 @@ android {
     }
     buildFeatures {
         dataBinding = true
+        viewBinding = true
     }
 }
 
@@ -81,6 +82,9 @@ dependencies {
     //Coroutines
     implementation Dependencies.ktCoRoutines
     implementation Dependencies.ktCoRoutinesAndroid
+    
+    def pagingVersion = "3.0.0"
+    implementation "androidx.paging:paging-runtime-ktx:$pagingVersion"
 
     //LiveData
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0-alpha02")

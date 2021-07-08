@@ -1,29 +1,28 @@
 package com.example.data.remote.api
 
+import androidx.annotation.IntRange
 import com.example.data.constants.API_KEY
-import com.example.data.model.BaseEntity
-import com.example.data.model.ImageEntity
-import com.example.data.model.Results
-import com.squareup.moshi.Moshi
-import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
-import retrofit2.Retrofit
+import com.example.data.constants.DEFAULT_PAGE_SIZE
+import com.example.data.constants.MAX_PAGE_SIZE
 import retrofit2.http.GET
-import retrofit2.converter.moshi.MoshiConverterFactory
 
 import retrofit2.http.Headers
 import retrofit2.http.Query
 
 
-
 interface ImageApiService {
 
     @Headers("Authorization: $API_KEY")
-    @GET("photos")
-    suspend fun getImages(): List<ImageEntity>
+    @GET("search/photos")
+    suspend fun getImages(
+        @Query("query") query: String,
+        @Query("page") @IntRange(from = 1) page: Int = 1,
+        @Query("per_page") @IntRange(
+            from = 1,
+            to = MAX_PAGE_SIZE.toLong()
+        ) perPage: Int = DEFAULT_PAGE_SIZE
+    ): ImageSearchResponse
 
-    @Headers("Authorization: $API_KEY")
-    @GET("search/collections")
-    suspend fun getCollection(@Query("query") categoryName: String): BaseEntity
 
 }
 

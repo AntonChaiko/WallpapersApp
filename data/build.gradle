@@ -42,6 +42,8 @@ dependencies {
 //    implementation Dependencies.retrofitGson
     implementation 'com.squareup.retrofit2:converter-moshi:2.9.0'
 
+    def pagingVersion = "3.0.0"
+    implementation "androidx.paging:paging-runtime-ktx:$pagingVersion"
     // Moshi
     implementation 'com.squareup.moshi:moshi-kotlin:1.9.3'
 

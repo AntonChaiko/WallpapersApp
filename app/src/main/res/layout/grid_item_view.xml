@@ -4,11 +4,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
+ <!--   <data>
+        app:imageUrl="@{photo.full}"
         <variable
             name="photo"
             type="com.example.data.model.Urls" />
-    </data>
+    </data>-->
 
     <ImageView
         android:id="@+id/mars_image"
@@ -17,6 +18,5 @@
         android:adjustViewBounds="true"
         android:padding="2dp"
         android:scaleType="fitXY"
-        app:imageUrl="@{photo.full}"
         tools:src="@tools:sample/backgrounds/scenic" />
 </layout>

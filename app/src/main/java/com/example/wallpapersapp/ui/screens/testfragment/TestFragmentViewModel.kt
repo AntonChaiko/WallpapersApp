@@ -1,44 +1,45 @@
 package com.example.wallpapersapp.ui.screens.testfragment
 
-import android.util.Log
-import androidx.lifecycle.*
-import com.example.data.model.BaseEntity
-import com.example.data.model.ImageEntity
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewModelScope
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
+import com.example.data.model.Results
 import com.example.data.repository.ImageApiRepositoryImpl
-import com.example.domain.repository.ImageApiRepository
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
-import kotlinx.coroutines.launch
-import javax.inject.Inject
+import kotlinx.coroutines.flow.Flow
 
 class TestFragmentViewModel(
     private val newsId: String,
     private val repository: ImageApiRepositoryImpl
-    ) : ViewModel() {
+) : ViewModel() {
 
-    private val _photos = MutableLiveData<List<ImageEntity>>()
-    val photos: LiveData<List<ImageEntity>> = _photos
+    private var currentQueryValue: String? = null
+    private var currentSearchResult: Flow<PagingData<Results>>? = null
 
-    private val _collection = MutableLiveData<BaseEntity>()
-    val collection: LiveData<BaseEntity> = _collection
 
     init {
-        getPhotos()
     }
 
-    private fun getPhotos() {
-        viewModelScope.launch {
-            try {
-                _photos.value = repository.getListOfImages()
+    fun searchRepo(queryString:String) : Flow<PagingData<Results>> {
 
-            } catch (e: Exception) {
-                Log.d("asd", e.message.toString())
-            }
+        val lastResult = currentSearchResult
+        if (queryString == currentQueryValue && lastResult != null) {
+            return lastResult
         }
+        currentQueryValue = queryString
+        val newResult: Flow<PagingData<Results>> = repository.getSearchResultStream(queryString)
+            .cachedIn(viewModelScope)
+        currentSearchResult = newResult
+        return newResult
     }
+
 
 }
+
 class NewsDetailsViewModelFactory @AssistedInject constructor(
     @Assisted("newsId") private val newsId: String,
     private val repository: ImageApiRepositoryImpl,
@@ -46,7 +47,7 @@ class NewsDetailsViewModelFactory @AssistedInject constructor(
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return TestFragmentViewModel(newsId,repository) as T
+        return TestFragmentViewModel(newsId, repository) as T
     }
 
     @AssistedFactory
