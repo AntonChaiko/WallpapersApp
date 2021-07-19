@@ -2,22 +2,27 @@ package com.example.data.db
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import androidx.room.TypeConverter
+import androidx.room.TypeConverters
+import com.example.data.model.Tags
+import com.example.data.model.Urls
 
 
 @Entity(tableName = "images_db")
 data class ImagesDb(
     var imageId: String,
-    @PrimaryKey(autoGenerate = true)
-    var userId: Long,
-    var urls: String,
+    var urls: Urls,
     var width: Int,
     var height: Int,
     var color: String?,
     var description: String?,
     var createdAt: String?,
-    var tags: String? = null
+    var tags: List<Tags>
 
-)
+) {
+    @PrimaryKey(autoGenerate = true)
+    var userId: Long = 0
+}
 
 @Entity
 data class UserDb(

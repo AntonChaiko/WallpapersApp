@@ -23,7 +23,7 @@ data class Results(
     @Json(name = "created_at")
     val createdAt: String?,
     @Json(name = "tags")
-    val tags: List<Tags>?
+    val tags: List<Tags>
 ) : Parcelable
 @Parcelize
 data class Tags(

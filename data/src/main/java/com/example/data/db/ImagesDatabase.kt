@@ -4,8 +4,12 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
+import androidx.room.migration.Migration
+import androidx.sqlite.db.SupportSQLiteDatabase
 
-@Database(entities = [ImagesDb::class, UserDb::class], version = 1, exportSchema = false)
+@Database(entities = [ImagesDb::class, UserDb::class], version = 2, exportSchema = false)
+@TypeConverters(Convertors::class)
 abstract class ImagesDatabase : RoomDatabase() {
     abstract fun imagesDao(): ImagesDao
 }
@@ -20,7 +24,7 @@ fun getDatabase(context: Context): ImagesDatabase {
                 context.applicationContext,
                 ImagesDatabase::class.java,
                 "images_db"
-            ).build()
+            ).fallbackToDestructiveMigration().build()
         }
     }
     return INSTANCE

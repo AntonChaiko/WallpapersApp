@@ -10,6 +10,6 @@ data class ImageAndUser(
         parentColumn = "userId",
         entityColumn = "imageOwnerId"
     )
-    val userDb: UserDb
+    val userDb: UserDb?
 ) {
 }
