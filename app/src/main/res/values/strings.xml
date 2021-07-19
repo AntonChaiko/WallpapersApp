@@ -2,4 +2,19 @@
     <string name="app_name">WallpapersApp</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="new_york">New York</string>
+    <string name="search">Поиск</string>
+    <string name="fav">Избранное</string>
+    <string name="history">История</string>
+    <string name="send_to">success</string>
+    <string name="full_image">full image</string>
+    <string name="small_image">small image</string>
+    <string name="save_to_fav">Сохранить в избранное</string>
+    <string name="blocked_screen">Установить на заставку экрана блокировки</string>
+    <string name="wallpapers_to_work_table">Установить как обои рабочего стола</string>
+    <string name="main_image">main image</string>
+    <string name="portfolio">Портфолио</string>
+    <string name="color">Цвет</string>
+    <string name="date">Дата</string>
+    <string name="size">Размеры</string>
 </resources>

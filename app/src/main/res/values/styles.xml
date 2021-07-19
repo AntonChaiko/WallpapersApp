@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.App" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="bottomNavigationStyle">
+            @style/Widget.MaterialComponents.BottomNavigationView.Colored
+        </item>
+        <item name="colorPrimary">@color/black</item>
+        <item name="colorOnPrimary">@color/white</item>
+    </style>
+
+    <style name="myTextViewStyle">
+        <item name="android:paddingTop">@dimen/textPaddingTop</item>
+        <item name="android:paddingStart">@dimen/textPaddingStart</item>
+        <item name="android:paddingEnd">@dimen/textPaddingEnd</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:drawablePadding">@dimen/textDrawablePadding</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:textColor">@color/text_color</item>
+        <item name="android:textSize">@dimen/textSize</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="myFabStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/fabMarginTop</item>
+        <item name="android:layout_marginEnd">@dimen/fabMarginBottom</item>
+        <item name="android:backgroundTint">@color/white</item>
+        <item name="android:elevation">@dimen/fabElevation</item>
+        <item name="borderWidth">@dimen/fabBorderWidth</item>
+    </style>
+
+    <style name="myCircleImageStyle">
+        <item name="android:layout_marginTop">@dimen/circleImageMarginTop</item>
+        <item name="android:layout_width">@dimen/circleImageSize</item>
+        <item name="android:layout_height">@dimen/circleImageSize</item>
+    </style>
+
+    <style name="myBoldParent">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="myBoldStyleTextView" parent="myBoldParent">
+        <item name="android:layout_marginStart">@dimen/boldTextMarginStart</item>
+        <item name="android:layout_marginBottom">@dimen/boldTextMarginBottom</item>
+        <item name="android:textSize">@dimen/boldTextSize</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="myBoldSocialTextView" parent="myBoldParent">
+        <item name="android:layout_marginTop">@dimen/boldLayoutMarginTop</item>
+        <item name="android:drawablePadding">@dimen/boldDrawablePadding</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="myCardParent">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="cardCornerRadius">@dimen/cardCornerRadius</item>
+        <item name="cardElevation">@dimen/cardElevationSize</item>
+        <item name="android:layout_marginBottom">@dimen/cardMarginBottom</item>
+    </style>
+
+    <style name="myCardText" parent="myBoldParent">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/cardTextTextSize</item>
+    </style>
+</resources>
+   
+     

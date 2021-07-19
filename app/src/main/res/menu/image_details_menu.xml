@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <item
+        android:id="@+id/share_bottom_menu"
+        android:enabled="true"
+        android:icon="@drawable/ic_share"
+        android:title="@string/search"
+        />
+    <item
+        android:id="@+id/tune_bottom_menu"
+        android:enabled="true"
+        android:icon="@drawable/ic_tune"
+        tools:ignore="MenuTitle"
+        android:title="@string/fav"/>
+    <item
+        android:id="@+id/info_bottom_menu"
+        android:enabled="true"
+        android:icon="@drawable/ic_info"
+        android:title="@string/history" />
+</menu>

@@ -1,6 +1,7 @@
-package com.example.wallpapersapp.ui.screens.testfragment.adapter
+package com.example.wallpapersapp.ui.screens.searchfragment.adapter
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,8 +13,11 @@ import com.example.data.model.Results
 import com.example.wallpapersapp.R
 import com.example.wallpapersapp.databinding.GridItemViewBinding
 
-class ImagesAdapter(context: Context) :
-    PagingDataAdapter<Results, ImagesViewHolder>(ArticleDiffItemCallback) {
+class ImagesAdapter(
+    context: Context,
+    val imageDetails: (result: Results) -> Unit
+) :
+    PagingDataAdapter<Results, ImagesAdapter.ImagesViewHolder>(ArticleDiffItemCallback) {
 
     private val layoutInflater: LayoutInflater = LayoutInflater.from(context)
 
@@ -24,21 +28,29 @@ class ImagesAdapter(context: Context) :
     override fun onBindViewHolder(holder: ImagesViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
-}
 
-class ImagesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class ImagesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-    private val binding = GridItemViewBinding.bind(itemView)
+        private val binding = GridItemViewBinding.bind(itemView)
 
-    fun bind(images: Results?) = with(itemView) {
-        binding.marsImage.load(images?.urls?.regular){
+        fun bind(images: Results?) = with(itemView) {
+
+            binding.photoImageView.load(images?.urls?.regular) {
 //            placeholder(ColorDrawable(Color.TRANSPARENT))
-            crossfade(true)
 //            crossfade(1000)
-            error(R.drawable.ic_broken_image)
+                crossfade(true)
+                error(R.drawable.ic_broken_image)
+            }
+
+            binding.photoImageView.setOnClickListener {
+                imageDetails(images!!)
+                Log.d("asd","CLICKED!")
+            }
         }
+
     }
 }
+
 
 private object ArticleDiffItemCallback : DiffUtil.ItemCallback<Results>() {
 

@@ -1,7 +1,10 @@
 package com.example.data.model
 
+import android.os.Parcelable
 import com.squareup.moshi.Json
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class Results(
     @Json(name = "id")
     val id: String,
@@ -9,8 +12,29 @@ data class Results(
     val urls: Urls,
     @Json(name = "user")
     val user: User,
-    )
+    @Json(name = "width")
+    val width: Int,
+    @Json(name = "height")
+    val height: Int,
+    @Json(name = "color")
+    val color: String?,
+    @Json(name = "description")
+    val description: String?,
+    @Json(name = "created_at")
+    val createdAt: String?,
+    @Json(name = "tags")
+    val tags: List<Tags>
+) : Parcelable
 
+@Parcelize
+data class Tags(
+    @Json(name = "title")
+    val title: String
+) : Parcelable {
+
+}
+
+@Parcelize
 data class User(
     @Json(name = "username")
     val userName: String,
@@ -24,17 +48,20 @@ data class User(
     val profileImage: ProfileImage,
     @Json(name = "instagram_username")
     val instagramUsername: String?
-) {
+) : Parcelable {
 
 }
 
+@Parcelize
 data class ProfileImage(
     @Json(name = "small")
     val small: String?,
     @Json(name = "medium")
     val medium: String?,
-)
+) : Parcelable
 
+
+@Parcelize
 data class Urls(
     @Json(name = "raw")
     val raw: String,
@@ -45,4 +72,6 @@ data class Urls(
     @Json(name = "small")
     val small: String
 
-)
+) : Parcelable
+
+//"updated_at":"2021-07-14T00:31:04-04:00",

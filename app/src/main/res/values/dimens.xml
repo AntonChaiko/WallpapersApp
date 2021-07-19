@@ -1,2 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+
+    //text dimens
+    <dimen name="textPaddingTop">28dp</dimen>
+    <dimen name="textPaddingStart">18dp</dimen>
+    <dimen name="textPaddingEnd">28dp</dimen>
+    <dimen name="textPaddingBottom">28dp</dimen>
+    <dimen name="textSize">14sp</dimen>
+    <dimen name="textDrawablePadding">20dp</dimen>
+
+    //bold text dimens
+    <dimen name="boldTextMarginStart">16dp</dimen>
+    <dimen name="boldTextMarginBottom">24dp</dimen>
+    <dimen name="boldTextSize">18sp</dimen>
+    <dimen name="boldLayoutMarginTop">8dp</dimen>
+    <dimen name="boldDrawablePadding">16dp</dimen>
+
+    //title text dimens
+    <dimen name="titleWidth">0dp</dimen>
+    <dimen name="titleMarginTop">16dp</dimen>
+    <dimen name="titleTextSize">20sp</dimen>
+
+    //card text dimens
+    <dimen name="cardTextTextSize">16sp</dimen>
+    <dimen name="cardElevationSize">4dp</dimen>
+    <dimen name="cardMarginBottom">6dp</dimen>
+
+
+    //fab dimens
+    <dimen name="fabMarginTop">16dp</dimen>
+    <dimen name="fabMarginBottom">16dp</dimen>
+    <dimen name="fabElevation">4dp</dimen>
+    <dimen name="fabBorderWidth">0dp</dimen>
+
+    //circle image dimens
+    <dimen name="circleImageSize">64dp</dimen>
+    <dimen name="circleImageMarginTop">16dp</dimen>
+
+
+    //portfolio button dimens
+    <dimen name="portfolioButtonWidth">0dp</dimen>
+    <dimen name="portfolioButtonHeight">36dp</dimen>
+    <dimen name="portfolioMarginTop">8dp</dimen>
+
+    //line view dimens
+    <dimen name="lineHeight">1dp</dimen>
+    <dimen name="lineMarginTop">20dp</dimen>
+
+    //linear layout container
+    <dimen name="containerSize">0dp</dimen>
+    <dimen name="containerPaddingStartEnd">16dp</dimen>
+    <dimen name="containerPaddingTop">8dp</dimen>
+
+    //card view dimens
+    <dimen name="cardMarginEnd">8dp</dimen>
+    <dimen name="cardMarginStart">8dp</dimen>
+    <dimen name="cardCornerRadius">32dp</dimen>
+    <dimen name="cardMarginLeft">4dp</dimen>
+    <dimen name="cardMarginRight">4dp</dimen>
+</resources>

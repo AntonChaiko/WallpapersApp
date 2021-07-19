@@ -7,7 +7,54 @@
 
     <fragment
         android:id="@+id/testFragment"
-        android:name="com.example.wallpapersapp.ui.screens.testfragment.TestFragment"
+        android:name="com.example.wallpapersapp.ui.screens.searchfragment.SearchFragment"
         android:label="fragment_test"
-        tools:layout="@layout/fragment_test" />
+        tools:layout="@layout/fragment_test" >
+        <action
+            android:id="@+id/action_to_image_details"
+            app:destination="@id/imageDetailsFragment" />
+        <argument
+            android:name="currentResult"
+            app:argType="com.example.data.model.Results" />
+    </fragment>
+    <fragment
+        android:id="@+id/imageDetailsFragment"
+        android:name="com.example.wallpapersapp.ui.screens.imagedetailsfragment.ImageDetailsFragment"
+        android:label="ImageDetailsFragment"
+        tools:layout="@layout/image_details_fragment">
+        <argument
+            android:name="currentImage"
+            app:argType="com.example.data.model.Results" />
+        <action
+            android:id="@+id/action_imageDetailsFragment_to_testFragment"
+            app:destination="@id/testFragment"
+            app:popUpTo="@id/testFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_imageDetailsFragment_to_webViewFragment"
+            app:destination="@id/webViewFragment" />
+        <action
+            android:id="@+id/action_imageDetailsFragment_to_favoritesFragment"
+            app:destination="@id/favoritesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/webViewFragment"
+        android:name="com.example.wallpapersapp.ui.screens.webviewfragment.WebViewFragment"
+        android:label="WebViewFragment"
+        tools:layout="@layout/fragment_web_view">
+        <argument
+            android:name="currentUserPortfolio"
+            app:argType="string"
+            app:nullable="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/favoritesFragment"
+        android:name="com.example.wallpapersapp.ui.screens.favoritesfragment.FavoritesFragment"
+        android:label="FavoritesFragment"
+        tools:layout="@layout/fragment_favorites"/>
+    <fragment
+        android:id="@+id/historyFragment"
+        android:name="com.example.wallpapersapp.ui.screens.historyfragment.HistoryFragment"
+        android:label="fragment_history"
+        tools:layout="@layout/fragment_history" />
 </navigation>
