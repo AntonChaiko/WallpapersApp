@@ -23,13 +23,12 @@ data class Results(
     @Json(name = "created_at")
     val createdAt: String?,
     @Json(name = "tags")
-    val tags: List<Tags>
+    val tags: List<Tags>?
 ) : Parcelable
-
 @Parcelize
 data class Tags(
     @Json(name = "title")
-    val title: String
+    val title: String?
 ) : Parcelable {
 
 }
@@ -74,4 +73,3 @@ data class Urls(
 
 ) : Parcelable
 
-//"updated_at":"2021-07-14T00:31:04-04:00",

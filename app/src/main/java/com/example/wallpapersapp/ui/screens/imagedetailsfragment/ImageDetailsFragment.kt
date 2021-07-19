@@ -1,6 +1,7 @@
 package com.example.wallpapersapp.ui.screens.imagedetailsfragment
 
 import android.annotation.SuppressLint
+import android.app.Application
 import android.app.WallpaperManager
 import android.content.Intent
 import android.graphics.drawable.BitmapDrawable
@@ -8,20 +9,28 @@ import android.net.Uri
 import android.opengl.GLSurfaceView
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import coil.load
+import com.example.data.db.getDatabase
+import com.example.data.model.Results
+import com.example.data.repository.ImagesRepositoryImpl
 import com.example.wallpapersapp.R
 import com.example.wallpapersapp.databinding.ImageDetailsFragmentBinding
 import com.example.wallpapersapp.util.ext.ImageDetailsViewModelFactory
 import com.google.android.play.core.internal.a
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.io.File
 
 
@@ -34,15 +43,17 @@ class ImageDetailsFragment : Fragment() {
     private lateinit var viewModel: ImageDetailsViewModel
     private lateinit var viewModelFactory: ImageDetailsViewModelFactory
 
-
     @SuppressLint("WebViewApiAvailability")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
         binding = ImageDetailsFragmentBinding.inflate(inflater)
-        viewModelFactory = ImageDetailsViewModelFactory(args.currentImage)
+
+        viewModelFactory = ImageDetailsViewModelFactory(args.currentImage, activity?.application!!)
         viewModel = ViewModelProvider(this, viewModelFactory).get(ImageDetailsViewModel::class.java)
+
         binding.viewModel = viewModel
         setToolbar()
 
@@ -67,6 +78,7 @@ class ImageDetailsFragment : Fragment() {
             }
             false
         }
+
         binding.about.portfolioButton.setOnClickListener {
             val portfolioUrl = viewModel.currentImage.user.portfolioUrl
             if (portfolioUrl.isNullOrEmpty()) Toast.makeText(
@@ -98,7 +110,7 @@ class ImageDetailsFragment : Fragment() {
     }
 
     private fun setToolbar() {
-        binding.myToolbar.title = viewModel.currentImage.tags[0].title
+        binding.myToolbar.title = viewModel.currentImage.tags?.get(0)?.title
         (activity as AppCompatActivity?)!!.setSupportActionBar(binding.myToolbar)
         (activity as AppCompatActivity?)!!.supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }

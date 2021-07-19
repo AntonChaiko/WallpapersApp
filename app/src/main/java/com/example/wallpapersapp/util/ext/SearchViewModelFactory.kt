@@ -1,5 +1,6 @@
 package com.example.wallpapersapp.util.ext
 
+import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.data.model.Results
@@ -27,10 +28,13 @@ class SearchViewModelFactory @AssistedInject constructor(
     }
 }
 
-class ImageDetailsViewModelFactory(private val currentImage: Results) : ViewModelProvider.Factory {
+class ImageDetailsViewModelFactory(
+    private val currentImage: Results,
+    private val application: Application
+) : ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(ImageDetailsViewModel::class.java)) {
-            return ImageDetailsViewModel(currentImage) as T
+            return ImageDetailsViewModel(currentImage = currentImage, application = application) as T
         }
         throw IllegalArgumentException("Unknown view model class")
     }

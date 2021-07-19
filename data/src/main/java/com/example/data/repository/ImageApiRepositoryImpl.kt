@@ -33,7 +33,6 @@ class ImageApiRepositoryImpl @Inject constructor(
                 ImageSource(query, imageApiService)
             }
         ).flow
-//            .stateIn(viewModelScope, SharingStarted.Lazily, PagingData.empty())
     }
 
 
