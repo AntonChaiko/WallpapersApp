@@ -41,6 +41,7 @@ class ImageDetailsFragment : Fragment() {
     private val args: ImageDetailsFragmentArgs by navArgs()
 
     private lateinit var viewModel: ImageDetailsViewModel
+
     private lateinit var viewModelFactory: ImageDetailsViewModelFactory
 
     @SuppressLint("WebViewApiAvailability")
@@ -80,20 +81,16 @@ class ImageDetailsFragment : Fragment() {
         }
 
         binding.about.portfolioButton.setOnClickListener {
-//            val portfolioUrl = viewModel.currentImage.user.portfolioUrl
-//            if (portfolioUrl.isNullOrEmpty()) Toast.makeText(
-//                requireContext(),
-//                "Portfolio is empty",
-//                Toast.LENGTH_SHORT
-//            ).show() else goToPortfolio(portfolioUrl)
+            val portfolioUrl = viewModel.currentImage.user.portfolioUrl
+            if (portfolioUrl.isNullOrEmpty()) Toast.makeText(
+                requireContext(),
+                "Portfolio is empty",
+                Toast.LENGTH_SHORT
+            ).show() else goToPortfolio(portfolioUrl)
+        }
 
-            viewModel.insertData(viewModel.currentImage)
-
-                viewModel.x.observe(viewLifecycleOwner, {
-                    it.forEach { img ->
-                        Log.d("das", img.userDb?.instagramUsername.toString())
-                    }
-                })
+        binding.saveToFavTextView.setOnClickListener {
+            viewModel.insertData()
         }
 
         binding.desktopWallpaperTextView.setOnClickListener { setWallpaper(true) }
@@ -138,6 +135,5 @@ class ImageDetailsFragment : Fragment() {
         if (viewModel.currentImage.user.twitterUsername.isNullOrEmpty()) binding.about.userTwitterTextView.visibility =
             View.GONE
     }
-
 }
 

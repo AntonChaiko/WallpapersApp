@@ -21,7 +21,7 @@ class ImageDetailsViewModel(
 ) : AndroidViewModel(application) {
 
     private val repository = ImagesRepositoryImpl(getDatabase(application))
-    val x = repository.res
+
     init {
 
     }
@@ -33,24 +33,11 @@ class ImageDetailsViewModel(
     val userName: String
         get() = "@${currentImage.user.userName}"
 
-    /* fun getSomeData() {
-
-         viewModelScope.launch {
-             list = repository.getAllImages()
-             Log.d("asd","worked")
-             Log.d("asd",list.size.toString())
-         }
-     }*/
-    fun insertData(currentImage: Results) {
+    fun insertData() {
         viewModelScope.launch {
             repository.insertImage(currentImage)
             repository.insertUser(currentImage)
         }
     }
 
-    /* fun getData25() {
-         viewModelScope.launch {
-             list = repository.getAllImages()
-         }
-     }*/
 }

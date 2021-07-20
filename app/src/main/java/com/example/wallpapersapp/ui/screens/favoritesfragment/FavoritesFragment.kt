@@ -1,19 +1,17 @@
 package com.example.wallpapersapp.ui.screens.favoritesfragment
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.wallpapersapp.R
 import com.example.wallpapersapp.databinding.FragmentFavoritesBinding
 import com.example.wallpapersapp.ui.screens.favoriteimagesfragment.FavoriteImagesFragment
-import com.example.wallpapersapp.ui.screens.favoritesfragment.adapters.CollectionAdapter
 import com.example.wallpapersapp.ui.screens.searchrequestsfragment.SearchRequestsFragment
 import com.google.android.material.tabs.TabLayoutMediator
-import kotlinx.android.synthetic.main.fragment_favorites.*
 
 
 class FavoritesFragment : Fragment() {

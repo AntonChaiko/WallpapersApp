@@ -11,5 +11,4 @@ data class ImageAndUser(
         entityColumn = "imageOwnerId"
     )
     val userDb: UserDb?
-) {
-}
+)

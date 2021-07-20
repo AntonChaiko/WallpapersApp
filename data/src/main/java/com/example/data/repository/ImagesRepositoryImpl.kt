@@ -12,17 +12,7 @@ class ImagesRepositoryImpl(database: ImagesDatabase) : ImagesRepository {
 
     private var imagesDao = database.imagesDao()
 
-//    val images: LiveData<List<Results>> = Transformations.map(imagesDao.getImages()) {
-//        it.asImagesDb()
-//    }
-
-    val res = imagesDao.getImages()
-
-//    val res = getImageAndUser()
-
-//    fun getImageAndUser(): LiveData<List<ImageAndUser>> {
-//        return imagesDao.getImages()
-//    }
+    val images = imagesDao.getImages()
 
     suspend fun insertImage(images: Results) {
         withContext(Dispatchers.IO) {
