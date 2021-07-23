@@ -7,11 +7,14 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import com.example.data.db.ImageAndUser
+import com.example.data.db.imagesdb.ImageAndUser
 import com.example.wallpapersapp.R
 import com.example.wallpapersapp.databinding.FavImagesItemBinding
 
-class FavoriteImagesAdapter :
+class FavoriteImagesAdapter(
+    val deleteUser: (id: Long) -> Unit,
+    val goToDetails: (imageAndUser: ImageAndUser) -> Unit
+) :
     ListAdapter<ImageAndUser, FavoriteImagesAdapter.ImagesViewHolder>(ImagesDiffCallback) {
 
 
@@ -31,17 +34,22 @@ class FavoriteImagesAdapter :
 
         fun bind(images: ImageAndUser?) = with(itemView) {
 
-            binding.favImageView.load(images?.imagesDb?.urls?.regular) {
-//            placeholder(ColorDrawable(Color.TRANSPARENT))
+            binding.photoImageView.load(images?.imagesDb?.urls?.regular) {
                 crossfade(1000)
                 crossfade(true)
                 error(R.drawable.ic_broken_image)
             }
+            binding.photoImageView.setOnClickListener {
+                if (images != null) {
+                    goToDetails(images)
+                }
+            }
+            binding.removeImageFab.setOnClickListener {
+                if (images != null) {
+                    deleteUser(images.imagesDb.userId)
+                }
 
-//            binding.photoImageView.setOnClickListener {
-//                imageDetails(images!!)
-//                Log.d("asd","CLICKED!")
-//            }
+            }
         }
 
     }

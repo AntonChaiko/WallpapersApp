@@ -3,12 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <!--<data>
+    <data>
+
         <variable
-            app:listData="@{viewModel.collection}"
             name="viewModel"
-            type="com.example.wallpapersapp.ui.screens.testfragment.TestFragmentViewModel" />
-    </data>-->
+            type="com.example.wallpapersapp.ui.screens.searchfragment.SearchFragmentViewModel" />
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -39,11 +39,11 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/query_text_input"
-                android:text="New york"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/new_york"
-                android:lines="1" />
+                android:lines="1"
+                android:text="@{viewModel.text}" />
 
         </com.google.android.material.textfield.TextInputLayout>
 

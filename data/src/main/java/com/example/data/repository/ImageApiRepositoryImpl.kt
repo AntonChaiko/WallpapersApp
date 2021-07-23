@@ -34,6 +34,9 @@ class ImageApiRepositoryImpl @Inject constructor(
             }
         ).flow
     }
+    suspend fun getTotal(query: String) : Long {
+        return imageApiService.getImages(query).total
+    }
 
 
 }

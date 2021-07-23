@@ -1,37 +1,26 @@
 package com.example.wallpapersapp.ui.screens.imagedetailsfragment
 
 import android.annotation.SuppressLint
-import android.app.Application
 import android.app.WallpaperManager
+import android.content.Context
 import android.content.Intent
 import android.graphics.drawable.BitmapDrawable
-import android.net.Uri
-import android.opengl.GLSurfaceView
-import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import coil.load
-import com.example.data.db.getDatabase
-import com.example.data.model.Results
-import com.example.data.repository.ImagesRepositoryImpl
 import com.example.wallpapersapp.R
+import com.example.wallpapersapp.appComponent
 import com.example.wallpapersapp.databinding.ImageDetailsFragmentBinding
 import com.example.wallpapersapp.util.ext.ImageDetailsViewModelFactory
-import com.google.android.play.core.internal.a
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import java.io.File
+import javax.inject.Inject
 
 
 class ImageDetailsFragment : Fragment() {
@@ -40,9 +29,17 @@ class ImageDetailsFragment : Fragment() {
 
     private val args: ImageDetailsFragmentArgs by navArgs()
 
-    private lateinit var viewModel: ImageDetailsViewModel
+    private val viewModel: ImageDetailsViewModel by viewModels {
+        factory.create(args.currentImage)
+    }
 
-    private lateinit var viewModelFactory: ImageDetailsViewModelFactory
+    @Inject
+    lateinit var factory: ImageDetailsViewModelFactory.Factory
+
+    override fun onAttach(context: Context) {
+        context.appComponent.inject(this)
+        super.onAttach(context)
+    }
 
     @SuppressLint("WebViewApiAvailability")
     override fun onCreateView(
@@ -51,9 +48,6 @@ class ImageDetailsFragment : Fragment() {
     ): View {
 
         binding = ImageDetailsFragmentBinding.inflate(inflater)
-
-        viewModelFactory = ImageDetailsViewModelFactory(args.currentImage, activity?.application!!)
-        viewModel = ViewModelProvider(this, viewModelFactory).get(ImageDetailsViewModel::class.java)
 
         binding.viewModel = viewModel
         setToolbar()
@@ -95,6 +89,7 @@ class ImageDetailsFragment : Fragment() {
 
         binding.desktopWallpaperTextView.setOnClickListener { setWallpaper(true) }
         binding.lockScreenTextView.setOnClickListener { setWallpaper(false) }
+
         return binding.root
     }
 

@@ -1,9 +1,12 @@
 package com.example.wallpapersapp.di.module
 
+import androidx.lifecycle.ViewModelProvider
 import com.example.data.constants.BASE_URL
 import com.example.data.remote.api.ImageApiService
+import com.example.wallpapersapp.util.ext.SearchViewModelFactory
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
@@ -19,7 +22,6 @@ object ApiModule {
         return Moshi.Builder()
             .add(KotlinJsonAdapterFactory())
             .build()
-
     }
 
     @Provides

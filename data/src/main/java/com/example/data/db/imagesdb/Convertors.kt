@@ -1,4 +1,4 @@
-package com.example.data.db
+package com.example.data.db.imagesdb
 
 import androidx.room.TypeConverter
 import com.example.data.model.ProfileImage

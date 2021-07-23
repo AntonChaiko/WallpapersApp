@@ -1,4 +1,4 @@
-package com.example.data.db
+package com.example.data.db.imagesdb
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
@@ -17,12 +17,19 @@ interface ImagesDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertUser(user: UserDb)
 
+    @Query("DELETE FROM images_db WHERE userId = :userId")
+    fun deleteByImageId(userId: Long)
+
+    @Query("DELETE FROM userdb WHERE imageOwnerId = :imageOwnerId")
+    fun deleteByUserId(imageOwnerId: Long)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(images: List<ImagesDb>)
 
     @Query("DELETE FROM images_db")
     fun nukeTable()
+    @Query("DELETE FROM userdb")
+    fun nukeTable1()
 }
 
 /*

@@ -51,7 +51,11 @@
         android:id="@+id/favoritesFragment"
         android:name="com.example.wallpapersapp.ui.screens.favoritesfragment.FavoritesFragment"
         android:label="FavoritesFragment"
-        tools:layout="@layout/fragment_favorites"/>
+        tools:layout="@layout/fragment_favorites">
+        <action
+            android:id="@+id/action_favoritesFragment_to_imageDetailsFragment"
+            app:destination="@id/imageDetailsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/historyFragment"
         android:name="com.example.wallpapersapp.ui.screens.historyfragment.HistoryFragment"

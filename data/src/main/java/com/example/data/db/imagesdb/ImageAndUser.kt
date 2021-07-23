@@ -1,7 +1,6 @@
-package com.example.data.db
+package com.example.data.db.imagesdb
 
 import androidx.room.Embedded
-import androidx.room.Entity
 import androidx.room.Relation
 
 data class ImageAndUser(

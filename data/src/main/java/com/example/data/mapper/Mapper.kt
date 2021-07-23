@@ -1,14 +1,19 @@
-import com.example.data.db.ImagesDb
-import com.example.data.db.UserDb
+import com.example.data.db.imagesdb.ImageAndUser
+import com.example.data.db.imagesdb.ImagesDb
+import com.example.data.db.imagesdb.UserDb
+import com.example.data.db.searchdb.SearchDb
+import com.example.data.model.ProfileImage
 import com.example.data.model.Results
+import com.example.data.model.Urls
 import com.example.data.model.User
+import com.example.domain.model.dto.SearchEntity
 
 //package com.example.data.mapper
 //
 //import android.media.Image
-//import com.example.data.db.ImageAndUser
-//import com.example.data.db.ImagesDb
-//import com.example.data.db.UserDb
+//import com.example.data.db.imagesdb.ImageAndUser
+//import com.example.data.db.imagesdb.ImagesDb
+//import com.example.data.db.imagesdb.UserDb
 //import com.example.data.model.*
 //
 //fun List<ImageAndUser>.asResultModel(): List<Results> {
@@ -47,6 +52,37 @@ fun Results.asImagesDb(): ImagesDb {
         tags = this.tags
     )
 }
+
+fun ImageAndUser.asResultModel(): Results {
+    return Results(
+        id = this.imagesDb.imageId,
+        urls = Urls("", "", this.imagesDb.urls.regular, ""),
+        user = User(
+            this.userDb!!.userName,
+            this.userDb.name,
+            this.userDb.twitterUsername,
+            this.userDb.portfolioUrls,
+            ProfileImage("", this.userDb.profileImage),
+            this.userDb.instagramUsername
+        ),
+        width = this.imagesDb.width,
+        height = this.imagesDb.height,
+        color = this.imagesDb.color,
+        description = this.imagesDb.description,
+        createdAt = this.imagesDb.createdAt,
+        tags = this.imagesDb.tags
+    )
+}
+
+fun SearchEntity.asSearchDb(): SearchDb {
+    return SearchDb(
+        resultAmount = this.resultAmount,
+        searchDate = this.searchDate,
+        isFavorite = this.isFavorite,
+        searchQuery = this.searchQuery
+    )
+}
+
 //
 //fun List<ImagesDb>.asImagesDb(): List<Results> {
 //    return map {
