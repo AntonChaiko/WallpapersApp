@@ -25,7 +25,7 @@ class SearchRequestsFragment : Fragment() {
 
 
     val viewModel: SearchRequestsViewModel by viewModels {
-        factory.create("text")
+        factory.create("")
     }
 
     override fun onAttach(context: Context) {
@@ -39,10 +39,9 @@ class SearchRequestsFragment : Fragment() {
     ): View {
         binding = FragmentSearchRequestsBinding.inflate(inflater)
 
-
         viewModel.res.observe(viewLifecycleOwner, {
             it.forEach {
-                binding.testTextView.append("${it.searchQuery} \n")
+                binding.testTextView.append(it.searchQuery)
             }
         })
 

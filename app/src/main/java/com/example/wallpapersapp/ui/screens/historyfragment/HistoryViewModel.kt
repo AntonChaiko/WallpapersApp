@@ -1,10 +1,11 @@
 package com.example.wallpapersapp.ui.screens.historyfragment
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.data.db.searchdb.SearchDb
 import com.example.data.repository.SearchRepositoryImpl
 import com.example.domain.model.dto.SearchEntity
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class HistoryViewModel @Inject constructor(
@@ -14,5 +15,12 @@ class HistoryViewModel @Inject constructor(
 
 ) : ViewModel() {
     val res = repository.searchItems
+
+    fun updateSearchDatabase(searchDb: SearchDb) {
+        viewModelScope.launch {
+            searchDb.isFavorite = !searchDb.isFavorite
+            repository.updateSearch(searchDb)
+        }
+    }
 
 }

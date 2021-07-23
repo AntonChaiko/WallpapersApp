@@ -2,6 +2,7 @@ package com.example.data.repository
 
 import asSearchDb
 import com.example.data.db.searchdb.SearchDao
+import com.example.data.db.searchdb.SearchDb
 import com.example.domain.model.dto.SearchEntity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -12,10 +13,17 @@ class SearchRepositoryImpl @Inject constructor(
 ) {
 
     val searchItems = searchDao.getSearches()
+    val favoriteItems = searchDao.getAllFavoritesSearches()
 
-    suspend fun insertSearch(image: SearchEntity) {
+    suspend fun insertSearch(searchEntity: SearchEntity) {
         withContext(Dispatchers.IO) {
-            searchDao.insertSearch(image.asSearchDb())
+            searchDao.insertSearch(searchEntity.asSearchDb())
+        }
+    }
+
+    suspend fun updateSearch(searchDb: SearchDb) {
+        withContext(Dispatchers.IO) {
+            searchDao.updateSearch(searchDb)
         }
     }
 }

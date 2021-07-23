@@ -48,7 +48,7 @@ class SearchFragment : Fragment() {
     lateinit var viewModel: SearchFragmentViewModel
 
     private var searchJob: Job? = null
-    private var alreadyExecuted = false
+
     private val adapter by lazy {
         ImagesAdapter(requireContext()) { result -> imageDetails(result) }
     }
@@ -73,10 +73,9 @@ class SearchFragment : Fragment() {
 
         binding.viewModel = viewModel
 
-
         binding.queryTextInput.textChanges()
             .filterNot { it.isNullOrBlank() }
-            .debounce(300)
+            .debounce(500)
             .onEach {
                 viewModel.text = it.toString()
                 search(viewModel.text)

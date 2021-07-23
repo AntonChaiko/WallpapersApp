@@ -11,13 +11,6 @@
         android:layout_height="match_parent"
         tools:context=".ui.screens.searchrequestsfragment.SearchRequestsFragment">
 
-        <Button
-            android:id="@+id/test_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="button"
-            tools:ignore="MissingConstraints" />
-
         <TextView
             android:id="@+id/test_text_view"
             android:layout_width="match_parent"

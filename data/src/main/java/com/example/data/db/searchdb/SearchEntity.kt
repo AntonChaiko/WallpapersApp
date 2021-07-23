@@ -1,4 +1,4 @@
-package com.example.data.model
+package com.example.data.db.searchdb
 
 data class SearchEntity(
     val resultAmount:Int,

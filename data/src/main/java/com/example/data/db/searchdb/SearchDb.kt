@@ -6,11 +6,11 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "search_db")
 data class SearchDb(
-    val searchQuery:String,
+    @PrimaryKey
+    val searchQuery: String,
     val resultAmount: Long,
     val searchDate: String,
-    val isFavorite: Boolean
+    var isFavorite: Boolean = false
+
 ) {
-    @PrimaryKey(autoGenerate = true)
-    var id: Long = 0
 }

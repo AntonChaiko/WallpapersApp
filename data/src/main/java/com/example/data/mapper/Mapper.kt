@@ -83,6 +83,15 @@ fun SearchEntity.asSearchDb(): SearchDb {
     )
 }
 
+fun SearchDb.asSearchEntity(): SearchEntity {
+    return SearchEntity(
+        resultAmount = this.resultAmount,
+        searchDate = this.searchDate,
+        isFavorite = this.isFavorite,
+        searchQuery = this.searchQuery
+    )
+}
+
 //
 //fun List<ImagesDb>.asImagesDb(): List<Results> {
 //    return map {

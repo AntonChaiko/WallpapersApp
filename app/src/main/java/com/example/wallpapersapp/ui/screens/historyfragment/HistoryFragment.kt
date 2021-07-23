@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import asSearchEntity
 import com.example.domain.model.dto.SearchEntity
 import com.example.wallpapersapp.R
 import com.example.wallpapersapp.appComponent
@@ -44,12 +45,16 @@ class HistoryFragment : Fragment() {
         setAdapter()
         return binding.root
     }
+
     private fun setAdapter() {
-        val adapter = HistorySearchAdapter()
+        val adapter = HistorySearchAdapter {searchDb ->
+            viewModel.updateSearchDatabase(searchDb)
+        }
+
         viewModel.res.observe(viewLifecycleOwner, {
             adapter.submitList(it)
-            adapter.notifyDataSetChanged()
         })
         binding.historyRecyclerView.adapter = adapter
     }
+
 }

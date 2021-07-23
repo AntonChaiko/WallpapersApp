@@ -5,7 +5,6 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.example.data.model.Results
-import com.example.data.model.SearchEntity
 import com.example.data.repository.ImageApiRepositoryImpl
 import com.example.data.repository.SearchRepositoryImpl
 import kotlinx.coroutines.flow.Flow

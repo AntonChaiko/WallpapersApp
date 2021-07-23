@@ -16,4 +16,5 @@ abstract class BindModule {
 //    @Binds
 //    @Singleton
 //    abstract fun bindsFavoritesViewModelFactory(factory: FavoriteImagesViewModelFactory): ViewModelProvider.Factory
+
 }

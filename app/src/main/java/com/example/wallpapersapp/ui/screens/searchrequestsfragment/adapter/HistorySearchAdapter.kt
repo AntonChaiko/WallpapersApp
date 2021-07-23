@@ -10,23 +10,23 @@ import com.example.data.db.searchdb.SearchDb
 import com.example.wallpapersapp.R
 import com.example.wallpapersapp.databinding.HistoryCardViewBinding
 
-class HistorySearchAdapter(
+class SearchRequestsAdapter(
     val updateQuery: (searchDb: SearchDb) -> Unit
 ) :
-    ListAdapter<SearchDb, HistorySearchAdapter.SearchsViewHolder>(ImagesDiffCallback) {
+    ListAdapter<SearchDb, SearchRequestsAdapter.SearchesViewHolder>(SearchesDiffCallback) {
 
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchsViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchesViewHolder {
         val itemView = LayoutInflater.from(parent.context)
             .inflate(R.layout.history_card_view, parent, false)
-        return SearchsViewHolder(itemView)
+        return SearchesViewHolder(itemView)
     }
 
-    override fun onBindViewHolder(holder: SearchsViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: SearchesViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
 
-    inner class SearchsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class SearchesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         private val binding = HistoryCardViewBinding.bind(itemView)
 
@@ -49,7 +49,7 @@ class HistorySearchAdapter(
 }
 
 
-private object ImagesDiffCallback : DiffUtil.ItemCallback<SearchDb>() {
+private object SearchesDiffCallback : DiffUtil.ItemCallback<SearchDb>() {
     override fun areItemsTheSame(oldItem: SearchDb, newItem: SearchDb): Boolean =
         oldItem.searchQuery == newItem.searchQuery
 

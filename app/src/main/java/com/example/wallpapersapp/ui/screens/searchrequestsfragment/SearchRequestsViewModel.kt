@@ -11,6 +11,8 @@ class SearchRequestsViewModel @Inject constructor(
     private val text: String,
     private val repository: SearchRepositoryImpl
 ) : ViewModel() {
-    val res = repository.searchItems
+
+    val res = repository.favoriteItems
+
 
 }

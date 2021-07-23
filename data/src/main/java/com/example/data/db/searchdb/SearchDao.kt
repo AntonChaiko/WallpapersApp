@@ -11,5 +11,13 @@ interface SearchDao {
     fun getSearches(): LiveData<List<SearchDb>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertSearch(image: SearchDb)
+    fun insertSearch(searchDb: SearchDb)
+
+    @Update
+    fun updateSearch(searchDb: SearchDb)
+
+    @Query("select * from search_db where isFavorite=1")
+    fun getAllFavoritesSearches(): LiveData<List<SearchDb>>
+
+
 }
