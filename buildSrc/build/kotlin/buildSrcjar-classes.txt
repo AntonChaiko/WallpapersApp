@@ -1,1 +1,1 @@
-C:\Users\User\AndroidStudioProjects\wallpapers\buildSrc\build\classes\kotlin\main\Dependencies.class;C:\Users\User\AndroidStudioProjects\wallpapers\buildSrc\build\classes\kotlin\main\Kapts.class;C:\Users\User\AndroidStudioProjects\wallpapers\buildSrc\build\classes\kotlin\main\Versions.class
+C:\Users\smart\StudioProjects\wallpapers\buildSrc\build\classes\kotlin\main\Dependencies.class;C:\Users\smart\StudioProjects\wallpapers\buildSrc\build\classes\kotlin\main\Kapts.class;C:\Users\smart\StudioProjects\wallpapers\buildSrc\build\classes\kotlin\main\Versions.class

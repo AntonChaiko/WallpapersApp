@@ -26,4 +26,14 @@ class SearchRepositoryImpl @Inject constructor(
             searchDao.updateSearch(searchDb)
         }
     }
+    suspend fun deleteSearch(searchDb: SearchDb) {
+        withContext(Dispatchers.IO) {
+            searchDao.deleteSearch(searchDb)
+        }
+    }
+    suspend fun searchByQuery(query:String) : SearchDb {
+        return withContext(Dispatchers.IO) {
+            searchDao.searchByQuery(query)
+        }
+    }
 }

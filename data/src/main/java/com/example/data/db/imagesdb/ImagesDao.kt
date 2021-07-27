@@ -28,6 +28,7 @@ interface ImagesDao {
 
     @Query("DELETE FROM images_db")
     fun nukeTable()
+
     @Query("DELETE FROM userdb")
     fun nukeTable1()
 }

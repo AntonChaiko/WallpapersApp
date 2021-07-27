@@ -48,7 +48,6 @@ class FavoriteImagesAdapter(
                 if (images != null) {
                     deleteUser(images.imagesDb.userId)
                 }
-
             }
         }
 

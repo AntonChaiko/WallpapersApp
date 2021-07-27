@@ -12,19 +12,3 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 abstract class SearchesDatabase : RoomDatabase() {
     abstract fun searchDao(): SearchDao
 }
-
-private lateinit var INSTANCE: SearchesDatabase
-
-
-fun getDatabase(context: Context): SearchesDatabase {
-    synchronized(SearchesDatabase::class.java) {
-        if (!::INSTANCE.isInitialized) {
-            INSTANCE = Room.databaseBuilder(
-                context.applicationContext,
-                SearchesDatabase::class.java,
-                "search_db"
-            ).fallbackToDestructiveMigration().build()
-        }
-    }
-    return INSTANCE
-}

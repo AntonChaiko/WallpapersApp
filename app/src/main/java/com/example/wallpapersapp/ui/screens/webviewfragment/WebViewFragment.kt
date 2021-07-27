@@ -44,10 +44,13 @@ class WebViewFragment : Fragment() {
     @SuppressLint("SetJavaScriptEnabled")
     private fun initWebView() {
 
-        binding.webView.settings.javaScriptEnabled = true
-        binding.webView.settings.loadWithOverviewMode = true
-        binding.webView.settings.useWideViewPort = true
-        binding.webView.settings.domStorageEnabled = true
+        binding.webView.settings.apply {
+            javaScriptEnabled = true
+            loadWithOverviewMode = true
+            useWideViewPort = true
+            domStorageEnabled = true
+        }
+
         binding.webView.webViewClient = object : WebViewClient() {
             override
             fun onReceivedSslError(view: WebView?, handler: SslErrorHandler?, error: SslError?) {
@@ -63,12 +66,10 @@ class WebViewFragment : Fragment() {
                 newProgress: Int
             ) {
                 super.onProgressChanged(view, newProgress)
-                progressBar.progress = newProgress
-                if (newProgress < MAX_PROGRESS && progressBar.visibility == ProgressBar.GONE) {
-                    progressBar.visibility = ProgressBar.VISIBLE
-                }
-                if (newProgress == MAX_PROGRESS) {
-                    progressBar.visibility = ProgressBar.GONE
+                binding.progressBar.apply {
+                    progress = newProgress
+                    visibility =
+                        if (newProgress < MAX_PROGRESS) ProgressBar.VISIBLE else ProgressBar.GONE
                 }
             }
         }

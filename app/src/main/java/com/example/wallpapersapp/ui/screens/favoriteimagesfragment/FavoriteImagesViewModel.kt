@@ -31,5 +31,4 @@ class FavoriteImagesViewModel @Inject constructor(
             repository.nukeTable()
         }
     }
-
 }

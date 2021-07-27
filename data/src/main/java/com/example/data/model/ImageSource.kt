@@ -25,7 +25,6 @@ class ImageSource(
 
             val response = imageApiService.getImages(query, position, pageSize)
 
-            val size = response.total
             val repos = response.items
             val nextKey = if (repos.isEmpty()) {
                 null

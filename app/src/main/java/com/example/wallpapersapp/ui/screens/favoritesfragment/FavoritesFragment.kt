@@ -26,9 +26,9 @@ class FavoritesFragment : Fragment() {
         binding.viewPager2.adapter = ScreenSlidePagerAdapter(requireActivity())
 
         TabLayoutMediator(binding.tabLayout, binding.viewPager2) { tab, position ->
-            when(position){
-                0-> tab.setIcon(R.drawable.ic_image)
-                1->tab.setIcon(R.drawable.ic_bookmark)
+            when (position) {
+                0 -> tab.setIcon(R.drawable.ic_image)
+                1 -> tab.setIcon(R.drawable.ic_bookmark)
             }
         }.attach()
 
@@ -44,7 +44,6 @@ class FavoritesFragment : Fragment() {
             }
             return FavoriteImagesFragment()
         }
-
     }
 }
 

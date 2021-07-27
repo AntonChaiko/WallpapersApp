@@ -2,6 +2,7 @@ package com.example.wallpapersapp.ui.screens.searchfragment
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -44,9 +45,7 @@ class SearchFragment : Fragment() {
 
     @Inject
     lateinit var factory: ViewModelProvider.Factory
-
     lateinit var viewModel: SearchFragmentViewModel
-
     private var searchJob: Job? = null
 
     private val adapter by lazy {
@@ -66,16 +65,13 @@ class SearchFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentTestBinding.inflate(inflater)
-
         binding.lifecycleOwner = this
-
         viewModel = ViewModelProviders.of(this, factory).get(SearchFragmentViewModel::class.java)
-
         binding.viewModel = viewModel
 
         binding.queryTextInput.textChanges()
             .filterNot { it.isNullOrBlank() }
-            .debounce(500)
+            .debounce(1000)
             .onEach {
                 viewModel.text = it.toString()
                 search(viewModel.text)
@@ -83,11 +79,7 @@ class SearchFragment : Fragment() {
             .launchIn(lifecycleScope)
 
         binding.recycler.adapter = adapter
-
-        binding.outlinedTextField.setEndIconOnClickListener {
-            changeView(requireContext())
-        }
-
+        binding.outlinedTextField.setEndIconOnClickListener { changeView() }
         return binding.root
     }
 
@@ -96,7 +88,6 @@ class SearchFragment : Fragment() {
         findNavController().navigate(action)
     }
 
-
     private fun search(query: String) {
         searchJob?.cancel()
         searchJob = lifecycleScope.launch {
@@ -104,48 +95,61 @@ class SearchFragment : Fragment() {
                 adapter.submitData(it)
             }
         }
-        viewModel.addSearchQuery(
-            viewModel.createEntity(
-                binding.queryTextInput.text.toString(),
-                viewModel.total,
-                DateTime.now().toString(),
-                false
-            )
-        )
     }
 
     @SuppressLint("UseCompatLoadingForDrawables")
-    private fun changeView(context: Context) {
+    private fun changeView() {
         when ((binding.recycler.layoutManager as GridLayoutManager).spanCount) {
-            2 -> {
-                binding.recycler.layoutManager = setLayoutManager(3)
-                binding.outlinedTextField.endIconDrawable =
-                    context.getDrawable(R.drawable.ic_three_rows)
-            }
-            3 -> {
-                binding.recycler.layoutManager = setLayoutManager(2)
-                binding.outlinedTextField.endIconDrawable =
-                    context.getDrawable(R.drawable.ic_two_rows)
-            }
+            2 -> setSpanCount(3, R.drawable.ic_three_rows)
+            3 -> setSpanCount(2, R.drawable.ic_two_rows)
         }
+    }
+
+    @SuppressLint("UseCompatLoadingForDrawables")
+    private fun setSpanCount(spanCount: Int, drawableId: Int) {
+        binding.recycler.layoutManager = setLayoutManager(spanCount)
+        binding.outlinedTextField.endIconDrawable = context?.getDrawable(drawableId)
     }
 
     private fun setLayoutManager(spanCount: Int): GridLayoutManager {
         return GridLayoutManager(requireContext(), spanCount)
     }
 
-
     @ExperimentalCoroutinesApi
     fun EditText.textChanges(): Flow<CharSequence?> {
         return callbackFlow {
-
             val listener = doOnTextChanged { text, _, before, count ->
-                if (count < before) return@doOnTextChanged else trySend(text)
+                if (count < before || count == 0) return@doOnTextChanged else {
+                    CoroutineScope(Dispatchers.Main).launch {
+                        viewModel.writeSearchFieldIntoDatabase(text.toString())
+                    }
+                    trySend(text)
+                }
             }
             addTextChangedListener(listener)
             awaitClose { removeTextChangedListener(listener) }
         }.onStart { emit(text) }
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        setSharedPreferences()
+    }
 
+    override fun onStart() {
+        super.onStart()
+        val savedString = getSharedPreferences().getString("SEARCH_FIELD", "London")
+        viewModel.text = savedString.toString()
+    }
+
+    private fun setSharedPreferences() {
+        val editor = getSharedPreferences().edit()
+        editor?.apply {
+            putString("SEARCH_FIELD", binding.queryTextInput.text.toString())
+        }?.apply()
+    }
+
+    private fun getSharedPreferences(): SharedPreferences {
+        return requireActivity().getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
+    }
 }

@@ -17,7 +17,13 @@ interface SearchDao {
     fun updateSearch(searchDb: SearchDb)
 
     @Query("select * from search_db where isFavorite=1")
+
     fun getAllFavoritesSearches(): LiveData<List<SearchDb>>
 
+    @Query("select * from search_db where searchQuery LIKE :query")
+    fun searchByQuery(query: String): SearchDb
 
+
+    @Delete
+    fun deleteSearch(searchDb: SearchDb)
 }

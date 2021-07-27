@@ -55,10 +55,18 @@
         <action
             android:id="@+id/action_favoritesFragment_to_imageDetailsFragment"
             app:destination="@id/imageDetailsFragment" />
+        <action
+            android:id="@+id/action_favoritesFragment_to_testFragment"
+            app:destination="@id/testFragment" />
     </fragment>
     <fragment
         android:id="@+id/historyFragment"
         android:name="com.example.wallpapersapp.ui.screens.historyfragment.HistoryFragment"
         android:label="fragment_history"
         tools:layout="@layout/fragment_history" />
+    <fragment
+        tools:layout="@layout/fragment_search_requests"
+        android:id="@+id/searchRequestsFragment"
+        android:name="com.example.wallpapersapp.ui.screens.searchrequestsfragment.SearchRequestsFragment"
+        android:label="SearchRequestsFragment" />
 </navigation>
